@@ -10,9 +10,8 @@ create table if not exists Lied_Kuenstler
 create table if not exists Lied (
 	LiedId int auto_increment unique key primary key,
 	Kuensterzahl int (40),
-	KuensterlId int (40),
 	Liedname varchar (40),
-	Erscheinungsdatum date 
+	Erscheinungsdatum date
 );
 
 create table if not exists Manager (
