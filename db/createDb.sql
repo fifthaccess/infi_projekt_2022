@@ -7,6 +7,7 @@ create table if not exists Lied_Kuenstler
     kuenstlerId int (40),
     LiedId int (40)
     );
+    
 create table if not exists Lied (
 	LiedId int auto_increment unique key primary key,
 	Kuensterzahl int (40),
