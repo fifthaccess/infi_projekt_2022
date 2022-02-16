@@ -34,7 +34,8 @@ create table if not exists Lied_Kuenstler
     
 create table if not exists Kuenstler (
 	KuenstlerId int auto_increment unique key primary key,
-	Gehalt int (40),
+	Gehalt int (40),0,
+	
 	Herkunftsland varchar (40),
 	Vorname varchar (40),
 	Nachname varchar (40),
