@@ -18,8 +18,7 @@ create table if not exists Manager (
 
 create table if not exists Kuenstler (
 	KuenstlerId int auto_increment unique key primary key,
-	Gehalt int (40),0,
-	
+	Gehalt int (40),
 	Herkunftsland varchar (40),
 	Vorname varchar (40),
 	Nachname varchar (40),
