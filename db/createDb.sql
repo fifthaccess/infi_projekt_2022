@@ -3,7 +3,7 @@ use Projekt_06;
 
 create table if not exists Lied (
 	LiedId int auto_increment unique key primary key,
-	Kuensterzahl int (40),
+	Kuenstleranzahl int (40),
 	Liedname varchar (40),
 	Erscheinungsdatum date
 );
