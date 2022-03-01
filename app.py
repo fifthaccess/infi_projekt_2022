@@ -11,9 +11,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "mysql://root:root@localhost/Projekt_06"
 db.init_app(app)
 @app.route("/", methods=["get","post"])
 def index():
-    addItemFormObject = AddItemForm()
+
     items = db.session.query(Lied).all()
-    return render_template("index.html", headline="Todo Items", form = addItemFormObject, items = items)
+    return render_template("index.html", headline="Übersicht")#, form = addItemFormObject, items = items)
     
 
 app.run(debug=True)
