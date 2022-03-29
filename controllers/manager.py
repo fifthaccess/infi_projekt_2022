@@ -1,5 +1,4 @@
 from operator import index
-from typing_extensions import Required
 from flask import Flask, redirect, request, flash
 from flask.templating import render_template
 from flask import Blueprint
