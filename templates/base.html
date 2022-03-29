@@ -21,7 +21,21 @@
 </head>
 
 <body>
-    <h1>{{headline}}!!!</h1>
+    <h1>{{headline}}</h1>
+
+
+    
+        <a class="nav-link dropdown-toggle" href="/products" id="navbarDropdownMenuLink" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Member 
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="/">Hauptseite</a></li>
+          <li><a class="dropdown-item" href="/managers">Managers</a></li>
+          
+          <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
+        </ul>
+      
 
     {%block body%}
 

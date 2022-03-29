@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+<!--{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endwith %}-->
+
+
+<h3>All Managers</h3>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Vorname</th>
+      <th scope="col">Nachname</th>
+      <th scope="col">Firma</th>
+      <th scope="col">Kuenstler_anzahl</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for manager in managers %}
+    <tr>
+      <td>{{manager.ManagerID}}</td>
+      <td>{{manager.Vorname}}</td>
+      <td>{{manager.Nachname}}</td>
+      <td>{{manager.Firma}}</td>
+      <td>{{manager.Kuenstler_anzahl}}</td>
+
+      <!--<td>
+        <a class="btn btn-outline-secondary" href="/products/edit?productCode={{product.productCode}}">✏️</a>
+        <form action="/products/delete" method="post" style="display: inline;">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="productCode" id="productCode" value="{{product.productCode}}">
+          <a class="btn btn-outline-secondary" href="#" onclick="deleteProduct(this); return false;">🗑️</a>
+        </form>
+      </td>-->
+    </tr>
+    {% endfor %}
+
+
+  </tbody>
+</table>
+
+{%endblock%}
