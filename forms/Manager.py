@@ -6,7 +6,7 @@ from wtforms.fields import DecimalField
 from wtforms import validators
 from model.models import Kuenstler
 
-class Manager(FlaskForm):
+class ManagerForm(FlaskForm):
     ManagerID = StringField("ManagerID",[validators.InputRequired()])
     Vorname = StringField("Vorname")
     Nachname = StringField("Nachname")

@@ -30,20 +30,13 @@
 
     {% for manager in managers %}
     <tr>
-      <td>{{manager.ManagerID}}</td>
+      <td>{{manager.ManagerId}}</td>
       <td>{{manager.Vorname}}</td>
       <td>{{manager.Nachname}}</td>
       <td>{{manager.Firma}}</td>
       <td>{{manager.Kuenstler_anzahl}}</td>
 
-      <!--<td>
-        <a class="btn btn-outline-secondary" href="/products/edit?productCode={{product.productCode}}">✏️</a>
-        <form action="/products/delete" method="post" style="display: inline;">
-          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-          <input type="hidden" name="productCode" id="productCode" value="{{product.productCode}}">
-          <a class="btn btn-outline-secondary" href="#" onclick="deleteProduct(this); return false;">🗑️</a>
-        </form>
-      </td>-->
+      
     </tr>
     {% endfor %}
 
