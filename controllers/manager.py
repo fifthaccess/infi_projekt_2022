@@ -23,14 +23,15 @@ def manager_view():
 @manager_blueprint.route('/managers/add', methods=["Get", "Post"])
 def manager_add():
     session : sqlalchemy.orm.scoping.scoped_session = db.session
-    add_manager_form = ManagerForm()
 
-    if request.method == 'Post':
+    add_manager_form = ManagerForm()
+    managers = session.query(Manager).order_by(Manager.ManagerId).all() 
+    if request.method == 'POST':
 
         if add_manager_form.validate_on_submit():
-            new_manager =  ManagerForm()
+            new_manager =  Manager()
 
-            print(add_manager_form.Nachname)
+            print(add_manager_form.Nachname.data)
             #new_manager.ManagerId = add_manager_form.ManagerID.data
             new_manager.Vorname = add_manager_form.Vorname.data
             new_manager.Nachname = add_manager_form.Nachname.data
@@ -43,6 +44,10 @@ def manager_add():
             return redirect("/managers")
 
         else:
-            return render_template("manager/addmanager.html", managers = add_manager_form, headline = "Add Managers")
+            return render_template("manager/addmanager.html", headline = "Add Managers", form = add_manager_form, managers = managers)
     else:
-        return render_template("manager/addmanager.html", managers = add_manager_form, headline = "Add Managers", form = add_manager_form)
+        return render_template("manager/addmanager.html", headline = "Add Managers", form = add_manager_form, managers = managers)                   
+
+@manager_blueprint.route('/managers/delete', methods=["Get", "Post"])
+def manager_delete ():
+    session : sqlalchemy.orm.scoping.scoped_session = db.session
