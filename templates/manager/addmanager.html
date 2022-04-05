@@ -2,32 +2,42 @@
 
 {%block body%}
 
+<a class="nav-link dropdown-toggle" href="/products" id="navbarDropdownMenuLink" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Optionen  
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="/">Hauptseite</a></li>
+          <li><a class="dropdown-item" href="/managers">View Managers</a></li>
+          <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
+          
+          <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
+        </ul>
 
-
-<form method="post">
-    {{managers.csrf_token}}
+<form method="POST">
+    {{form.csrf_token}}
 
     <!-- {{ form.errors }} -->
 
 
     <div class="mb-3">
         <label for="Vorname" class="form-label">Vorname</label>
-        {{managers.Vorname(class_="form-control")}}
+        {{form.Vorname(class_="form-control")}}
     </div>
 
     <div class="mb-3">
         <label for="Nachname" class="form-label">Nachname</label>
-        {{managers.Nachname(class_="form-control")}}
+        {{form.Nachname(class_="form-control")}}
     </div>
 
     <div class="mb-3">
         <label for="Firma" class="form-label">Firma</label>
-        {{managers.Firma(class_="form-control")}}
+        {{form.Firma(class_="form-control")}}
     </div>
 
     <div class="mb-3">
         <label for="Kuenstler_anzahl" class="form-label">Kuenstler_anzahl</label>
-        {{managers.Kuenstler_anzahl(class_="form-control")}}
+        {{form.Kuenstler_anzahl(class_="form-control")}}
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
