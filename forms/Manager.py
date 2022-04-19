@@ -1,8 +1,8 @@
 from operator import imod
 from flask_wtf import FlaskForm
-from wtforms.fields.datetime import DateField
+from wtforms.fields.datetime import DateField 
 from wtforms.fields.simple import BooleanField, StringField, TextAreaField ,HiddenField
-from wtforms.fields import DecimalField
+from wtforms.fields import DecimalField, FieldList
 from wtforms import validators
 from model.models import Kuenstler
 
@@ -12,3 +12,6 @@ class ManagerForm(FlaskForm):
     Nachname = StringField("Nachname")
     Firma = StringField("Firma")
     Kuenstler_anzahl = DecimalField("Kuenstler_anzahl")
+
+class DeleteManagerFrom(FlaskForm):
+    CheckedCheckboxes = HiddenField("Checked")

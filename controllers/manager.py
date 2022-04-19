@@ -1,3 +1,4 @@
+from ast import Del
 from operator import index
 from pyexpat import model
 from flask import Flask, redirect, request, flash
@@ -6,8 +7,8 @@ from flask import Blueprint
 import sqlalchemy
 import sqlalchemy.orm
 from model.models import db
-from forms.Manager import ManagerForm
-from model.models import Manager
+from forms.Manager import ManagerForm , DeleteManagerFrom
+from model.models import Manager 
 
 manager_blueprint = Blueprint('manager_blueprint',__name__)
 
@@ -27,7 +28,7 @@ def manager_add():
     add_manager_form = ManagerForm()
     managers = session.query(Manager).order_by(Manager.ManagerId).all() 
     if request.method == 'POST':
-
+        print("f")
         if add_manager_form.validate_on_submit():
             new_manager =  Manager()
 
@@ -45,9 +46,22 @@ def manager_add():
 
         else:
             return render_template("manager/addmanager.html", headline = "Add Managers", form = add_manager_form, managers = managers)
+        
     else:
         return render_template("manager/addmanager.html", headline = "Add Managers", form = add_manager_form, managers = managers)                   
 
 @manager_blueprint.route('/managers/delete', methods=["Get", "Post"])
-def manager_delete ():
+def manager_delete():
     session : sqlalchemy.orm.scoping.scoped_session = db.session
+    managers = session.query(Manager).order_by(Manager.ManagerId).all() 
+    del_form = DeleteManagerFrom()
+    if request.method == 'POST':
+        print("f")
+        if del_form.validate_on_submit():
+            print(del_form.CheckedCheckboxes.data)
+        else:
+            print("invalide Form")
+            return render_template("manager/deleteManager.html", managers = managers, headline = "Delete Managers", form = del_form )
+        
+    else:
+        return render_template("manager/deleteManager.html", managers = managers, headline = "Delete Managers", form = del_form )
