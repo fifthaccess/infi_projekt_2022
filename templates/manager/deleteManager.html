@@ -13,6 +13,7 @@
 {% endif %}
 {% endwith %}-->
 <script type="text/javascript"> 
+
 function Checkboxes()
 {
   var i;
@@ -25,7 +26,7 @@ function Checkboxes()
       Checked_Checkedbox.push(c[i].value)
     }
   let test = Checked_Checkedbox.join(",")
-  document.getElementById("Checked").value = test
+  document.getElementById("CheckedCheckboxes").value = test
   console.log(test);
 
   
@@ -45,10 +46,13 @@ function Try()
           <li><a class="dropdown-item" href="/">Hauptseite</a></li>
           <li><a class="dropdown-item" href="/managers">View Managers</a></li>
           <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
+          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
           
           <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
         </ul>
 <form method="POST" >
+  {{form.csrf_token}}
+
     <table class="table">
     <thead>
         <tr>
@@ -79,7 +83,7 @@ function Try()
     </tbody>
     </table>
     
-    <input type ="hidden" name = "Checked" id ="Checked" value ="">
+    <input type ="hidden" name = "CheckedCheckboxes" id ="CheckedCheckboxes" value ="">
 
     <button type="submit" class="btn btn-primary" onclick="Try()">Delete</button>
 </form>

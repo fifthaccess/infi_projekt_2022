@@ -14,4 +14,11 @@ class ManagerForm(FlaskForm):
     Kuenstler_anzahl = DecimalField("Kuenstler_anzahl")
 
 class DeleteManagerFrom(FlaskForm):
-    CheckedCheckboxes = HiddenField("Checked")
+    CheckedCheckboxes = HiddenField("CheckedCheckboxes")
+
+class editManagerForm(FlaskForm):
+    ManagerID = HiddenField("ManagerID")
+    Vorname = StringField("Vorname")
+    Nachname = StringField("Nachname")
+    Firma = StringField("Firma")
+    Kuenstler_anzahl = DecimalField("Kuenstler_anzahl")

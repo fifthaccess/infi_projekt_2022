@@ -1,0 +1,38 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+
+<button  onclick= "window.location.href='/managers'">🔙Leave</button>
+
+<form method="POST">
+    {{form.csrf_token}}
+
+    <!-- {{ form.errors }} -->
+
+        {{form.ManagerID(class_="form-control")}}
+
+    <div class="mb-3">
+        <label for="Vorname" class="form-label">Vorname</label>
+        {{form.Vorname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Nachname" class="form-label">Nachname</label>
+        {{form.Nachname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Firma" class="form-label">Firma</label>
+        {{form.Firma(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Kuenstler_anzahl" class="form-label">Kuenstler_anzahl</label>
+        {{form.Kuenstler_anzahl(class_="form-control")}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+{%endblock%}

@@ -22,7 +22,7 @@
           <li><a class="dropdown-item" href="/">Hauptseite</a></li>
           <li><a class="dropdown-item" href="/managers">View Managers</a></li>
           <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
-          
+          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
           <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
         </ul>
 
@@ -34,6 +34,7 @@
       <th scope="col">Nachname</th>
       <th scope="col">Firma</th>
       <th scope="col">Kuenstler_anzahl</th>
+      <th scope="col">edit</th>
     </tr>
   </thead>
   <tbody>
@@ -45,7 +46,7 @@
       <td>{{manager.Nachname}}</td>
       <td>{{manager.Firma}}</td>
       <td>{{manager.Kuenstler_anzahl}}</td>
-
+      <td><button class="btn btn-info " onclick= "window.location.href='/managers/edit?itemid={{manager.ManagerId}}'">✏️</button></td>
       
     </tr>
     {% endfor %}
