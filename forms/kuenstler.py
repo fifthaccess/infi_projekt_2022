@@ -12,7 +12,7 @@ from model.models import db
 
 class KuenstlerForm(FlaskForm):
     KuenstlerId = HiddenField("KuenstlerId")
-    ManagerID = HiddenField("ManagerID")
+    ManagerID = DecimalField("ManagerID")
     Vorname = StringField("Vorname")
     Nachname = StringField("Nachname")
     Herkunftsland = StringField("Herkunftsland")
@@ -26,4 +26,7 @@ class UserDetails(FlaskForm):
     #managers = session.query(Manager).order_by(Manager.ManagerId).all
     
     #form.group_id.choices = [(g.Vorname.data , g.Nachname.data) for g in managers]
+
+class DeleteKuenstlerForm(FlaskForm):
+    CheckedCheckboxes = HiddenField("CheckedCheckboxes")
 

@@ -1,0 +1,41 @@
+{%extends 'kuenstler/viewKuenstler.html'%}
+
+{%block body2%}
+
+
+
+<form method="POST">
+    {{form.csrf_token}}
+
+    <!-- {{ form.errors }} -->
+
+
+    <div class="mb-3">
+        <label for="Vorname" class="form-label">ManagerID</label>
+        {{form.ManagerID(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Nachname" class="form-label">Vorname</label>
+        {{form.Vorname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Firma" class="form-label">Nachname</label>
+        {{form.Nachname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Kuenstler_anzahl" class="form-label">Herkunftsland</label>
+        {{form.Herkunftsland(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Kuenstler_anzahl" class="form-label">Gehalt</label>
+        {{form.Gehalt(class_="form-control")}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{%endblock%}
