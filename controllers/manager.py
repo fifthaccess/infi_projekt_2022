@@ -76,10 +76,10 @@ def manager_delete():
             return render_template("manager/viewmanagers.html", managers = managers, headline = "Managers", form = del_form )
         else:
             print("invalide Form")
-            return render_template("manager/deleteManager.html", managers = managers, headline = "Delete Managers", form = del_form )
+            return render_template("manager/deletemanager.html", managers = managers, headline = "Delete Managers", form = del_form )
         
     else:
-        return render_template("manager/deleteManager.html", managers = managers, headline = "Delete Managers", form = del_form )
+        return render_template("manager/deletemanager.html", managers = managers, headline = "Delete Managers", form = del_form )
 
 @manager_blueprint.route('/managers/edit', methods=["Get", "Post"])
 def manager_edit():

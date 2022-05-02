@@ -20,4 +20,4 @@ def kuenstler_view():
     
     kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all() 
     
-    return render_template("manager/viewmanagers.html", managers = kuenstler, headline = "Kuenstler")
+    return render_template("kuenstler/viewKuenstler.html", kuenstlers = kuenstler, headline = "Kuenstler") # kuenstlers wird nur beutzt wegen dem identischen pural wie singular von kuenstler 
