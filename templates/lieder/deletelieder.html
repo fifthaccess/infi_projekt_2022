@@ -1,0 +1,91 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+<!--{% with messages = get_flashed_messages() %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+{% endwith %}-->
+<script type="text/javascript"> 
+
+function Checkboxes()
+{
+  var i;
+  let Checked_Checkedbox = [];
+  let c = document.querySelectorAll("input[type=checkbox]");
+
+   /* jede Checkbox abchecken und wenn ausgewaehlt auflisten : */
+  for (i=0;i<c.length;i++)
+    if (c[i].checked == true){
+      Checked_Checkedbox.push(c[i].value)
+    }
+  let test = Checked_Checkedbox.join(",")
+  document.getElementById("CheckedCheckboxes").value = test
+  console.log(test);
+
+  
+}
+
+function Try()
+{
+  console.log(document.getElementById("ManagersToDelete").value);
+}
+</script> 
+
+<a class="nav-link dropdown-toggle" href="/products" id="navbarDropdownMenuLink" role="button"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          Optionen  
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item" href="/">Hauptseite</a></li>
+          <li><a class="dropdown-item" href="/managers">View Managers</a></li>
+          <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
+          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
+          
+          <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
+        </ul>
+<form method="POST" >
+  {{form.csrf_token}}
+
+    <table class="table">
+    <thead>
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Vorname</th>
+        <th scope="col">Nachname</th>
+        <th scope="col">Firma</th>
+        <th scope="col">Kuenstler_anzahl</th>
+        <th scope="col" style="color:red">Delete❌</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for manager in managers %}
+        <tr>
+        <td>{{manager.ManagerId}}</td>
+        <td>{{manager.Vorname}}</td>
+        <td>{{manager.Nachname}}</td>
+        <td>{{manager.Firma}}</td>
+        <td>{{manager.Kuenstler_anzahl}}</td>
+        <td><input type="checkbox" value="{{manager.ManagerId}}" onclick="Checkboxes()"></td>
+
+        
+        </tr>
+        {% endfor %}
+
+
+    </tbody>
+    </table>
+    
+    <input type ="hidden" name = "CheckedCheckboxes" id ="CheckedCheckboxes" value ="">
+
+    <button type="submit" class="btn btn-primary" onclick="Try()">Delete</button>
+</form>
+
+{%endblock%}
