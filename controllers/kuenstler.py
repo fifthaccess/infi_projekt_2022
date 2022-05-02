@@ -9,16 +9,15 @@ from flask import Blueprint
 import sqlalchemy
 import sqlalchemy.orm
 from model.models import Kuenstler, db
-from forms.Manager import ManagerForm , DeleteManagerFrom, editManagerForm
-from model.models import Manager 
+
 
 kuenstler_blueprint = Blueprint('kuenstler_blueprint',__name__)
 
 
 @kuenstler_blueprint.route("/kuenstler")
-def manager_view():
+def kuenstler_view():
     session : sqlalchemy.orm.scoping.scoped_session = db.session
     
     kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all() 
     
-    return render_template("manager/viewmanagers.html", managers = kuenstler, headline = "Managers")
+    return render_template("manager/viewmanagers.html", managers = kuenstler, headline = "Kuenstler")
