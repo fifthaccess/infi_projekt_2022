@@ -18,13 +18,13 @@
           data-bs-toggle="dropdown" aria-expanded="false">
           Optionen  
         </a>
-        
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" href="/">Hauptseite</a></li>
-          <!-- <li><a class="dropdown-item" href="/managers">View Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
-          <li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
+          <li><a class="dropdown-item" href="/kuenstler">View Künstler</a></li>
+          <li><a class="dropdown-item" href="/kuenstler/add">Add Künstler</a></li>
+          <li><a class="dropdown-item" href="/kuenstler/delete">Delete Künstler</a></li>
+          
+          <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
         </ul>
 
 <table class="table">
@@ -49,7 +49,7 @@
       <td>{{kuenstler.Nachname}}</td>
       <td>{{kuenstler.Herkunftsland}}</td>
       <td>{{kuenstler.Gehalt}}</td>
-      <td><button class="btn btn-info " onclick= "window.location.href='/managers/edit?itemid={{kuenstler.KuenstlerId}}'">✏️</button></td>
+      <td><button class="btn btn-info " onclick= "window.location.href='/kuenstler/edit?itemid={{kuenstler.KuenstlerId}}'">✏️</button></td>
       
     </tr>
     {% endfor %}

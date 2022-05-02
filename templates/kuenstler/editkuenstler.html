@@ -1,0 +1,42 @@
+{%extends 'base.html'%}
+
+{%block body%}
+
+
+<button class="btn btn-warning" onclick= "window.location.href='/kuenstler'">🔙Leave</button>
+
+<form method="POST">
+    {{form.csrf_token}}
+
+    <!-- {{ form.errors }} -->
+
+        {{form.KuenstlerId(class_="form-control")}}
+
+    <div class="mb-3">
+        <label for="Vorname" class="form-label">ManagerID</label>
+        {{form.ManagerID(class_="form-control")}}
+    </div>
+    <div class="mb-3">
+        <label for="Vorname" class="form-label">Vorname</label>
+        {{form.Vorname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Nachname" class="form-label">Nachname</label>
+        {{form.Nachname(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Firma" class="form-label">Herkunftsland</label>
+        {{form.Herkunftsland(class_="form-control")}}
+    </div>
+
+    <div class="mb-3">
+        <label for="Kuenstler_anzahl" class="form-label">Gehalt</label>
+        {{form.Gehalt(class_="form-control")}}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>
+
+{%endblock%}

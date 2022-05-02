@@ -30,3 +30,11 @@ class UserDetails(FlaskForm):
 class DeleteKuenstlerForm(FlaskForm):
     CheckedCheckboxes = HiddenField("CheckedCheckboxes")
 
+class editKuenstlerForm(FlaskForm):
+    KuenstlerId = HiddenField("KuenstlerId")
+    ManagerID = DecimalField("ManagerID")
+    Vorname = StringField("Vorname")
+    Nachname = StringField("Nachname")
+    Herkunftsland = StringField("Herkunftsland")
+    Gehalt = DecimalField("Gehalt")
+

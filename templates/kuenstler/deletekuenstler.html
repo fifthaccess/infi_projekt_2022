@@ -44,9 +44,9 @@ function Try()
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" href="/">Hauptseite</a></li>
-          <li><a class="dropdown-item" href="/managers">View Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
+          <li><a class="dropdown-item" href="/kuenstler">View Künstler</a></li>
+          <li><a class="dropdown-item" href="/kuenstler/add">Add Künstler</a></li>
+          <li><a class="dropdown-item" href="/kuenstler/delete">Delete Künstler</a></li>
           
           <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
         </ul>
@@ -56,24 +56,26 @@ function Try()
     <table class="table">
     <thead>
         <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Vorname</th>
-        <th scope="col">Nachname</th>
-        <th scope="col">Firma</th>
-        <th scope="col">Kuenstler_anzahl</th>
+          <th scope="col">KuenstlerId</th>
+          <th scope="col">ManagerID</th>
+          <th scope="col">Vorname</th>
+          <th scope="col">Nachname</th>
+          <th scope="col">Herkunftsland</th>
+          <th scope="col">Gehalt</th>
         <th scope="col" style="color:red">Delete❌</th>
         </tr>
     </thead>
     <tbody>
 
-        {% for manager in managers %}
+        {% for kuenstler in kuenstlers %}
         <tr>
-        <td>{{manager.ManagerId}}</td>
-        <td>{{manager.Vorname}}</td>
-        <td>{{manager.Nachname}}</td>
-        <td>{{manager.Firma}}</td>
-        <td>{{manager.Kuenstler_anzahl}}</td>
-        <td><input type="checkbox" value="{{manager.ManagerId}}" onclick="Checkboxes()"></td>
+          <td>{{kuenstler.KuenstlerId}}</td>
+          <td>{{kuenstler.ManagerId}}</td>
+          <td>{{kuenstler.Vorname}}</td>
+          <td>{{kuenstler.Nachname}}</td>
+          <td>{{kuenstler.Herkunftsland}}</td>
+          <td>{{kuenstler.Gehalt}}</td>
+        <td><input type="checkbox" value="{{kuenstler.KuenstlerId}}" onclick="Checkboxes()"></td>
 
         
         </tr>

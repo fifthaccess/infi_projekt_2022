@@ -8,7 +8,7 @@ from flask.templating import render_template
 from flask import Blueprint
 import sqlalchemy
 import sqlalchemy.orm
-from forms.Kuenstler import KuenstlerForm, DeleteKuenstlerForm
+from forms.Kuenstler import KuenstlerForm, DeleteKuenstlerForm, editKuenstlerForm
 from model.models import Kuenstler, db
 
 
@@ -78,10 +78,41 @@ def manager_delete():
                 print("deleted data with id " + i)
 
             kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all() 
-            return render_template("manager/viewmanagers.html", kuenstlers = kuenstler, headline = "Künstler", form = del_form )
+            return render_template("kuenstler/viewkuenstler.html", kuenstlers = kuenstler, headline = "Künstler", form = del_form )
         else:
             print("invalide Form")
-            return render_template("manager/deletemanager.html", kuenstlers = kuenstler, headline = "Delete Künstler", form = del_form )
+            return render_template("kuenstler/deletekuenstler.html", kuenstlers = kuenstler, headline = "Delete Künstler", form = del_form )
         
     else:
-        return render_template("manager/deletemanager.html", kuenstlers = kuenstler, headline = "Delete Künstler", form = del_form )
+        return render_template("kuenstler/deletekuenstler.html", kuenstlers = kuenstler, headline = "Delete Künstler", form = del_form )
+
+@kuenstler_blueprint.route('/kuenstler/edit', methods=["Get", "Post"])
+def kuenstler_edit():
+    edit_kuenstler_id = request.args["itemid"]
+    edit_kuenstler_form = editKuenstlerForm()
+
+    item_to_edit = db.session.query(Kuenstler).filter(Kuenstler.KuenstlerId == edit_kuenstler_id).first()
+
+    if request.method == 'POST':
+        print("Post")
+        if edit_kuenstler_form.validate_on_submit():
+            print("is validate")
+            
+
+            item_to_edit.kuenstlerId = edit_kuenstler_form.KuenstlerId.data 
+            item_to_edit.ManagerId = edit_kuenstler_form.ManagerID.data 
+            item_to_edit.Vorname = edit_kuenstler_form.Vorname.data 
+            item_to_edit.Nachname = edit_kuenstler_form.Nachname.data 
+            item_to_edit.Herkunftsland = edit_kuenstler_form.Herkunftsland.data 
+            item_to_edit.Gehalt = edit_kuenstler_form.Gehalt.data 
+            db.session.commit()
+            return redirect("/kuenstler")
+    else:
+        
+        edit_kuenstler_form.KuenstlerId.data = item_to_edit.KuenstlerId
+        edit_kuenstler_form.ManagerID.data = item_to_edit.ManagerId
+        edit_kuenstler_form.Vorname.data = item_to_edit.Vorname
+        edit_kuenstler_form.Nachname.data = item_to_edit.Nachname
+        edit_kuenstler_form.Herkunftsland.data  = item_to_edit.Herkunftsland
+        edit_kuenstler_form.Gehalt.data  = item_to_edit.Gehalt
+        return render_template("kuenstler/editkuenstler.html", headline = "Edit Kuenstler", form = edit_kuenstler_form)
