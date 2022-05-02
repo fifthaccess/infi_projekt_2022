@@ -60,24 +60,27 @@ def manager_delete():
     
     if request.method == 'POST':
         print("f")
-        if del_form.validate_on_submit():
-            delete_id_string = del_form.CheckedCheckboxes.data
-            delete_id_list = list(delete_id_string.split(","))
+        try:
+            if del_form.validate_on_submit():
+                delete_id_string = del_form.CheckedCheckboxes.data
+                delete_id_list = list(delete_id_string.split(","))
 
-            print(del_form.CheckedCheckboxes.data)
-            for i in delete_id_list:
-                print("deleting now data with id " + i)
-                itemToDelete = db.session.query(Manager).filter(Manager.ManagerId == i)
-                itemToDelete.delete()
-                db.session.commit()
-                print("deleted data with id " + i)
+                print(del_form.CheckedCheckboxes.data)
+                for i in delete_id_list:
+                    print("deleting now data with id " + i)
+                    itemToDelete = db.session.query(Manager).filter(Manager.ManagerId == i)
+                    itemToDelete.delete()
+                    db.session.commit()
+                    print("deleted data with id " + i)
 
-            managers = session.query(Manager).order_by(Manager.ManagerId).all() 
-            return render_template("manager/viewmanagers.html", managers = managers, headline = "Managers", form = del_form )
-        else:
-            print("invalide Form")
+                managers = session.query(Manager).order_by(Manager.ManagerId).all() 
+                return render_template("manager/viewmanagers.html", managers = managers, headline = "Managers", form = del_form )
+            else:
+                print("invalide Form")
+                return render_template("manager/deletemanager.html", managers = managers, headline = "Delete Managers", form = del_form )
+        except:
+            print("invalide request because of foreign key construct ")
             return render_template("manager/deletemanager.html", managers = managers, headline = "Delete Managers", form = del_form )
-        
     else:
         return render_template("manager/deletemanager.html", managers = managers, headline = "Delete Managers", form = del_form )
 
