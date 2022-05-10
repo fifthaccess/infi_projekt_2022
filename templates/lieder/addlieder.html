@@ -1,4 +1,4 @@
-{%extends 'manager/viewmanagers.html'%}
+{%extends 'lieder/viewlieder.html'%}
 
 {%block body2%}
 
@@ -11,24 +11,20 @@
 
 
     <div class="mb-3">
-        <label for="Vorname" class="form-label">Vorname</label>
-        {{form.Vorname(class_="form-control")}}
+        <label for="Vorname" class="form-label">Kuenstleranzahl</label>
+        {{form.Kuenstleranzahl(class_="form-control")}}
     </div>
 
     <div class="mb-3">
-        <label for="Nachname" class="form-label">Nachname</label>
-        {{form.Nachname(class_="form-control")}}
+        <label for="Nachname" class="form-label">Liedname</label>
+        {{form.Liedname(class_="form-control")}}
     </div>
 
     <div class="mb-3">
-        <label for="Firma" class="form-label">Firma</label>
-        {{form.Firma(class_="form-control")}}
+        <label for="Firma" class="form-label">Erscheinungsdatum</label>
+        {{form.Erscheinungsdatum(class_="form-control")}}
     </div>
 
-    <div class="mb-3">
-        <label for="Kuenstler_anzahl" class="form-label">Kuenstler_anzahl</label>
-        {{form.Kuenstler_anzahl(class_="form-control")}}
-    </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

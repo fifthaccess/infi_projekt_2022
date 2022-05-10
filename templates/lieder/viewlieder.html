@@ -21,33 +21,31 @@
         
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" href="/">Hauptseite</a></li>
-          <li><a class="dropdown-item" href="/managers">View Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/add">Add Managers</a></li>
-          <li><a class="dropdown-item" href="/managers/delete">Delete Managers</a></li>
+          <li><a class="dropdown-item" href="/lieder">View Lieder</a></li>
+          <li><a class="dropdown-item" href="/lieder/add">Add Lieder</a></li>
+          <li><a class="dropdown-item" href="/lieder/delete">Delete Lieder</a></li>
           <!--<li><a class="dropdown-item" href="/products/add">Hinzufügen</a></li>-->
         </ul>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">ID</th>
-      <th scope="col">Vorname</th>
-      <th scope="col">Nachname</th>
-      <th scope="col">Firma</th>
-      <th scope="col">Kuenstler_anzahl</th>
-      <th scope="col">edit</th>
+      <th scope="col">LiedId</th>
+      <th scope="col">Kuenstleranzahl</th>
+      <th scope="col">Liedname</th>
+      <th scope="col">Erscheinungsdatum</th>
+
     </tr>
   </thead>
   <tbody>
 
-    {% for manager in managers %}
+    {% for lied in lieder %}
     <tr>
-      <td>{{manager.ManagerId}}</td>
-      <td>{{manager.Vorname}}</td>
-      <td>{{manager.Nachname}}</td>
-      <td>{{manager.Firma}}</td>
-      <td>{{manager.Kuenstler_anzahl}}</td>
-      <td><button class="btn btn-info " onclick= "window.location.href='/managers/edit?itemid={{manager.ManagerId}}'">✏️</button></td>
+      <td>{{lied.LiedId}}</td>
+      <td>{{lied.Kuenstleranzahl}}</td>
+      <td>{{lied.Liedname}}</td>
+      <td>{{lied.Erscheinungsdatum}}</td>
+      <td><button class="btn btn-info " onclick= "window.location.href='/lieder/edit?itemid={{lied.LiedId}}'">✏️</button></td>
       
     </tr>
     {% endfor %}
