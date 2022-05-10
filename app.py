@@ -1,7 +1,5 @@
 from flask import Flask
 from model.models import db
-from flask.templating import render_template
-#from addItemForm import AddItemForm
 from controllers.index import index_blueprint
 from controllers.manager import manager_blueprint
 from controllers.kuenstler import kuenstler_blueprint
