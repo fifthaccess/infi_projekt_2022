@@ -21,7 +21,7 @@ def kuenstler_view():
     
     kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all() 
     
-    return render_template("kuenstler/viewKuenstler.html", kuenstlers = kuenstler, headline = "Kuenstler") # kuenstlers wird nur beutzt wegen dem identischen pural wie singular von kuenstler 
+    return render_template("kuenstler/viewKuenstler.html", kuenstlers = kuenstler, headline = "Künstler") # kuenstlers wird nur beutzt wegen dem identischen pural wie singular von kuenstler 
 
 
 @kuenstler_blueprint.route('/kuenstler/add', methods=["Get", "Post"])
@@ -115,4 +115,4 @@ def kuenstler_edit():
         edit_kuenstler_form.Nachname.data = item_to_edit.Nachname
         edit_kuenstler_form.Herkunftsland.data  = item_to_edit.Herkunftsland
         edit_kuenstler_form.Gehalt.data  = item_to_edit.Gehalt
-        return render_template("kuenstler/editkuenstler.html", headline = "Edit Kuenstler", form = edit_kuenstler_form)
+        return render_template("kuenstler/editkuenstler.html", headline = "Edit Künstler", form = edit_kuenstler_form)
