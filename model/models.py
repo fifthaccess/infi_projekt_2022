@@ -5,7 +5,6 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 
-
 class Kuenstler(db.Model):
     __tablename__ = 'kuenstler'
 
@@ -16,8 +15,10 @@ class Kuenstler(db.Model):
     Nachname = db.Column(db.String(40))
     ManagerId = db.Column(db.ForeignKey('manager.ManagerId'), index=True)
 
-    manager = db.relationship('Manager', primaryjoin='Kuenstler.ManagerId == Manager.ManagerId', backref='kuenstlers')
-
+    manager = db.relationship(
+        'Manager',
+        primaryjoin='Kuenstler.ManagerId == Manager.ManagerId',
+        backref='kuenstlers')
 
 
 class Lied(db.Model):
@@ -29,7 +30,6 @@ class Lied(db.Model):
     Erscheinungsdatum = db.Column(db.Date)
 
 
-
 class LiedKuenstler(db.Model):
     __tablename__ = 'lied_kuenstler'
 
@@ -37,9 +37,14 @@ class LiedKuenstler(db.Model):
     KuenstlerId = db.Column(db.ForeignKey('kuenstler.KuenstlerId'), index=True)
     LiedId = db.Column(db.ForeignKey('lied.LiedId'), index=True)
 
-    kuenstler = db.relationship('Kuenstler', primaryjoin='LiedKuenstler.KuenstlerId == Kuenstler.KuenstlerId', backref='lied_kuenstlers')
-    lied = db.relationship('Lied', primaryjoin='LiedKuenstler.LiedId == Lied.LiedId', backref='lied_kuenstlers')
-
+    kuenstler = db.relationship(
+        'Kuenstler',
+        primaryjoin='LiedKuenstler.KuenstlerId == Kuenstler.KuenstlerId',
+        backref='lied_kuenstlers')
+    lied = db.relationship(
+        'Lied',
+        primaryjoin='LiedKuenstler.LiedId == Lied.LiedId',
+        backref='lied_kuenstlers')
 
 
 class Manager(db.Model):
