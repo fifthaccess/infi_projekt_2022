@@ -31,4 +31,33 @@
     <button type="submit" class="btn btn-primary">Save Changes</button>
 </form>
 
+
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">LiedId</th>
+        <th scope="col">Kuenstleranzahl</th>
+        <th scope="col">Liedname</th>
+        <th scope="col">Erscheinungsdatum</th>
+  
+      </tr>
+    </thead>
+    <tbody>
+  
+      {% for lied in lieder %}
+      <tr>
+        <td>{{lied.LiedId}}</td>
+        <td>{{lied.Kuenstleranzahl}}</td>
+        <td>{{lied.Liedname}}</td>
+        <td>{{lied.Erscheinungsdatum}}</td>
+        <td><button class="btn btn-info " onclick= "window.location.href='/lieder/edit?itemid={{lied.LiedId}}'">✏️</button></td>
+        
+      </tr>
+      {% endfor %}
+  
+  
+    </tbody>
+  </table>
+  
 {%endblock%}

@@ -4,7 +4,7 @@ from flask import Blueprint
 import sqlalchemy
 import sqlalchemy.orm
 from forms.lied import DeleteLiederForm, EditLiedForm, LiedForm
-from model.models import Lied, db
+from model.models import Lied, db, LiedKuenstler
 
 
 lied_blueprint = Blueprint('lied_blueprint', __name__)
@@ -103,11 +103,18 @@ def lied_delete():
 
 @lied_blueprint.route('/lieder/edit', methods=["Get", "Post"])
 def lied_edit():
+    session: sqlalchemy.orm.scoping.scoped_session = db.session
     edit_lied_id = request.args["itemid"]
     edit_lied_form = EditLiedForm()
 
     item_to_edit = db.session.query(Lied).filter(
         Lied.LiedId == edit_lied_id).first()
+
+    item_to_edit_details_query: sqlalchemy.orm.query.Query = session.query(LiedKuenstler)
+
+    item_to_edit_details = item_to_edit_details_query.\
+        filter(LiedKuenstler.LiedId == edit_lied_id).\
+        order_by(LiedKuenstler.KuenstlerId).all()
 
     if request.method == 'POST':
         print("Post")
@@ -129,4 +136,5 @@ def lied_edit():
         return render_template(
             "lieder/editlieder.html",
             headline="Edit Lieder",
+            lieder=item_to_edit_details,
             form=edit_lied_form)
