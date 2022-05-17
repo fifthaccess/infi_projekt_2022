@@ -1,14 +1,9 @@
-from operator import imod
+
 from flask_wtf import FlaskForm
-from wtforms.fields.datetime import DateField 
-from wtforms.fields.simple import BooleanField, StringField, TextAreaField ,HiddenField 
-from wtforms.fields import DecimalField, FieldList , SelectField
-from wtforms import validators
-from model.models import Kuenstler
-import sqlalchemy
-import sqlalchemy.orm
-from model.models import Manager 
-from model.models import db
+
+from wtforms.fields.simple import StringField,  HiddenField
+from wtforms.fields import DecimalField,  SelectField
+
 
 class KuenstlerForm(FlaskForm):
     KuenstlerId = HiddenField("KuenstlerId")
@@ -22,13 +17,15 @@ class KuenstlerForm(FlaskForm):
 class UserDetails(FlaskForm):
     group_id = SelectField('Group')
 
-    #session : sqlalchemy.orm.scoping.scoped_session = db.session
-    #managers = session.query(Manager).order_by(Manager.ManagerId).all
-    
-    #form.group_id.choices = [(g.Vorname.data , g.Nachname.data) for g in managers]
+    # session : sqlalchemy.orm.scoping.scoped_session = db.session
+    # managers = session.query(Manager).order_by(Manager.ManagerId).all
+
+    # form.group_id.choices = [(g.Vorname.data , g.Nachname.data) for g in managers]
+
 
 class DeleteKuenstlerForm(FlaskForm):
     CheckedCheckboxes = HiddenField("CheckedCheckboxes")
+
 
 class editKuenstlerForm(FlaskForm):
     KuenstlerId = HiddenField("KuenstlerId")
@@ -37,4 +34,3 @@ class editKuenstlerForm(FlaskForm):
     Nachname = StringField("Nachname")
     Herkunftsland = StringField("Herkunftsland")
     Gehalt = DecimalField("Gehalt")
-

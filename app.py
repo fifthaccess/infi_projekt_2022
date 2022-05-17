@@ -16,5 +16,5 @@ app.register_blueprint(index_blueprint)
 app.register_blueprint(manager_blueprint)
 app.register_blueprint(kuenstler_blueprint)
 app.register_blueprint(lied_blueprint)
-if __name__ == "__main__": 
-    app.run(debug=True)     
+if __name__ == "__main__":
+    app.run(debug=True)
