@@ -1,69 +1,89 @@
+from unittest import expectedFailure
 from flask import redirect, request
 from flask.templating import render_template
 from flask import Blueprint
 import sqlalchemy
 import sqlalchemy.orm
-from forms.lied import DeleteLiederForm, EditLiedForm, LiedForm
-from model.models import Lied, db, LiedKuenstler
+from forms.lied_kuenstler import LiedKuenstlerForm ,deleteLiedKuenstlerForm
+from model.models import Kuenstler, db, LiedKuenstler 
 
 
-lied_blueprint = Blueprint('lied_blueprint', __name__)
+lied_kuenstler_blueprint = Blueprint('lied_kuenstler_blueprint', __name__)
 
 
-@lied_blueprint.route("/lieder")
+@lied_kuenstler_blueprint.route("/lieder")
 def Lieder_view():
     session: sqlalchemy.orm.scoping.scoped_session = db.session
 
-    lied = session.query(Lied).order_by(Lied.LiedId).all()
+    lied = session.query(LiedKuenstler).order_by(LiedKuenstler.Id).all()
 
     return render_template("lieder/viewlieder.html", lieder=lied, headline="Lieder")
 
 
-@lied_blueprint.route('/lieder/add', methods=["Get", "Post"])
-def Lieder_add():
+@lied_kuenstler_blueprint.route('/lied_kuenstler/add', methods=["Get", "Post"])
+def Lied_kuenstler_add():
     session: sqlalchemy.orm.scoping.scoped_session = db.session
+    item_to_attach_id = request.args["itemid"]
+    add_lied_kuenstler_form = LiedKuenstlerForm()
+    connected_kuenstler = session.query(LiedKuenstler).filter(LiedKuenstler.LiedId == item_to_attach_id).all()
+    all_kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all()
+    kuenstler = []
+    try: 
+        for n in all_kuenstler:
+            for i in connected_kuenstler:
+                if n == i:
+                kuenstler.append(session.query(Kuenstler).filter(not(Kuenstler.KuenstlerId == i.KuenstlerId)).first())
 
-    add_lied_form = LiedForm()
-    lied = session.query(Lied).order_by(Lied.LiedId).all()
-
+    except AttributeError:
+        kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all()
     if request.method == 'POST':
         print("f")
-        if add_lied_form.validate_on_submit():
-            new_Lied = Lied()
+        if add_lied_kuenstler_form.validate_on_submit():
+            print(add_lied_kuenstler_form.CheckedCheckboxes.data)
+            kuenstler_ids_to_add = add_lied_kuenstler_form.CheckedCheckboxes.data
+
+            new_Lied_Kuenstler = LiedKuenstler()
 
             print("data is valid")
             # new_manager.ManagerId = add_manager_form.ManagerID.data
+            for i in kuenstler_ids_to_add:
+                new_Lied_Kuenstler.KuenstlerId = int(i)
+                new_Lied_Kuenstler.LiedId = item_to_attach_id
+                db.session.add(new_Lied_Kuenstler)
 
-            new_Lied.Kuenstleranzahl = add_lied_form.Kuenstleranzahl.data
-            new_Lied.Liedname = add_lied_form.Liedname.data
-            new_Lied.Erscheinungsdatum = add_lied_form.Erscheinungsdatum.data
-            db.session.add(new_Lied)
             db.session.commit()
 
-            return redirect("/lieder")
+            return redirect("/lieder/edit?itemid=" + item_to_attach_id)
 
         else:
             return render_template(
-                "lieder/addlieder.html",
-                headline="Add Lieder",
-                form=add_lied_form,
-                lieder=lied)
+            "liedkuenstler/liedkuenstleradd.html",
+            headline="Add Lieder",
+            kuenstlers = kuenstler,
+            form = add_lied_kuenstler_form)
 
     else:
         return render_template(
-            "lieder/addlieder.html",
+            "liedkuenstler/liedkuenstleradd.html",
             headline="Add Lieder",
-            form=add_lied_form,
-            lieder=lied)
+            kuenstlers = kuenstler,
+            form = add_lied_kuenstler_form)
 
 
-@lied_blueprint.route('/lieder/delete', methods=["Get", "Post"])
-def lied_delete():
+@lied_kuenstler_blueprint.route('/lied_kuenstler/delete', methods=["Get", "Post"])
+def lied_kuenstler_delete():
 
     session: sqlalchemy.orm.scoping.scoped_session = db.session
-    lied = session.query(Lied).order_by(Lied.LiedId).all()
+    item_to_attach_id = request.args["itemid"]
+    connected_kuenstler = session.query(LiedKuenstler).filter(LiedKuenstler.LiedId == item_to_attach_id).all()
+    kuenstler = []
+    try: 
+        for i in connected_kuenstler:
+            kuenstler.append(session.query(Kuenstler).filter(Kuenstler.KuenstlerId == i.KuenstlerId).first())
+    except AttributeError:
+        kuenstler = session.query(Kuenstler).order_by(Kuenstler.KuenstlerId).all()
 
-    del_form = DeleteLiederForm()
+    del_form = deleteLiedKuenstlerForm()
 
     if request.method == 'POST':
         print("f")
@@ -95,13 +115,13 @@ def lied_delete():
 
     else:
         return render_template(
-            "lieder/deletelieder.html",
-            lieder=lied,
-            headline="Delete Lieder",
-            form=del_form)
+            "liedkuenstler/liedkuenstlerdelete.html",
+            headline="Add Lieder",
+            kuenstlers = kuenstler,
+            form = del_form)
 
 
-@lied_blueprint.route('/lieder/edit', methods=["Get", "Post"])
+@lied_kuenstler_blueprint.route('/lied_kuenstler/edit', methods=["Get", "Post"])
 def lied_edit():
     session: sqlalchemy.orm.scoping.scoped_session = db.session
     edit_lied_id = request.args["itemid"]
@@ -115,7 +135,7 @@ def lied_edit():
     item_to_edit_details = item_to_edit_details_query.\
         filter(LiedKuenstler.LiedId == edit_lied_id).\
         order_by(LiedKuenstler.KuenstlerId).all()
-    
+
     if request.method == 'POST':
         print("Post")
         if edit_lied_form.validate_on_submit():
