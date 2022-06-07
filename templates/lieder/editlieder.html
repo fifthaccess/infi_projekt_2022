@@ -38,22 +38,25 @@
 <table class="table">
     <thead>
       <tr>
-        <th scope="col">LiedId</th>
-        <th scope="col">Kuenstleranzahl</th>
-        <th scope="col">Liedname</th>
-        <th scope="col">Erscheinungsdatum</th>
+        <th scope="col">KuenstlerId</th>
+        <th scope="col">ManagerID</th>
+        <th scope="col">Vorname</th>
+        <th scope="col">Nachname</th>
+        <th scope="col">Herkunftsland</th>
+        <th scope="col">Gehalt</th>
 
   
       </tr>
     </thead>
     <tbody>
-      {% for lied in lieder %}
+      {% for kuenstler_lied in kuenstlers_lied %}
       <tr>
-        <td>{{lied.LiedId}}</td>
-        <td>{{lied.Kuenstleranzahl}}</td>
-        <td>{{lied.Liedname}}</td>
-        <td>{{lied.Erscheinungsdatum}}</td>
-        
+        <td>{{kuenstler_lied.kuenstler.KuenstlerId}}</td>
+        <td>{{kuenstler_lied.kuenstler.ManagerId}}</td>
+        <td>{{kuenstler_lied.kuenstler.Vorname}}</td>
+        <td>{{kuenstler_lied.kuenstler.Nachname}}</td>
+        <td>{{kuenstler_lied.kuenstler.Herkunftsland}}</td>
+        <td>{{kuenstler_lied.kuenstler.Gehalt}}</td>
       </tr>
       {% endfor %}
   

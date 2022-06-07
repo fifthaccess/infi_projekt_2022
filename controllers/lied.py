@@ -115,7 +115,7 @@ def lied_edit():
     item_to_edit_details = item_to_edit_details_query.\
         filter(LiedKuenstler.LiedId == edit_lied_id).\
         order_by(LiedKuenstler.KuenstlerId).all()
-    
+
     if request.method == 'POST':
         print("Post")
         if edit_lied_form.validate_on_submit():
@@ -133,8 +133,9 @@ def lied_edit():
         edit_lied_form.Kuenstleranzahl.data = item_to_edit.Kuenstleranzahl
         edit_lied_form.Liedname.data = item_to_edit.Liedname
         edit_lied_form.Erscheinungsdatum.data = item_to_edit.Erscheinungsdatum
+
         return render_template(
             "lieder/editlieder.html",
             headline="Edit Lieder",
-            lieder=item_to_edit_details,
+            kuenstlers_lied=item_to_edit_details,
             form=edit_lied_form)
