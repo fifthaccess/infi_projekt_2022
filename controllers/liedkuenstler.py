@@ -20,7 +20,7 @@ def Lieder_view():
 
 
 @lied_kuenstler_blueprint.route('/lied_kuenstler/add', methods=["Get", "Post"])
-def Lied_kuenstler_add():
+def Liedkuenstler_add():
     session: sqlalchemy.orm.scoping.scoped_session = db.session
     item_to_attach_id = request.args["itemid"]
     add_lied_kuenstler_form = LiedKuenstlerForm()
@@ -29,19 +29,15 @@ def Lied_kuenstler_add():
     all_kuenstler = session.query(Kuenstler).order_by(
         Kuenstler.KuenstlerId).all()
     kuenstler = []
-    try:
-        for n in all_kuenstler:
-            is_connected = 0 
-            for i in connected_kuenstler:
-                if n.KuenstlerId == i.KuenstlerId:
-                   is_connected = 1
 
-            if is_connected == 0:
-                kuenstler.append(n)
+    for n in all_kuenstler:
+        is_connected = 0
+        for i in connected_kuenstler:
+            if n.KuenstlerId == i.KuenstlerId:
+                is_connected = 1
+        if is_connected == 0:
+            kuenstler.append(n)
 
-    except AttributeError:
-        kuenstler = session.query(Kuenstler).order_by(
-            Kuenstler.KuenstlerId).all()
     if request.method == 'POST':
         print("f")
         if add_lied_kuenstler_form.validate_on_submit():
@@ -102,7 +98,10 @@ def lied_kuenstler_delete():
             print(del_form.CheckedCheckboxes.data)
             for i in delete_id_list:
                 print("deleting now data with id " + i)
-                itemToDelete = db.session.query(LiedKuenstler).filter(sqlalchemy.and_(LiedKuenstler.LiedId == item_to_attach_id, LiedKuenstler.KuenstlerId == i))
+                itemToDelete = db.session.query(LiedKuenstler).filter(
+                    sqlalchemy.and_(
+                        LiedKuenstler.LiedId == item_to_attach_id,
+                        LiedKuenstler.KuenstlerId == i))
                 itemToDelete.delete()
                 db.session.commit()
                 print("deleted data with id " + i)
